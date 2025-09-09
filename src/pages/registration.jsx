@@ -33,21 +33,21 @@ const Registration = () => {
     e.preventDefault();
     console.log(formData);
     setFormData({
-    admissionNo: "",
-    firstName: "",
-    lastName: "",
-    gender: "",
-    admissionForClass: "",
-    section: "",
-    fatherName: "",
-    fatherCellPhone: "",
-    motherName: "",
-    motherCellPhone: "",
-    dob: "",
-    religion: "",
-    admissionDate: "",
-    image: null,
-  });
+      admissionNo: "",
+      firstName: "",
+      lastName: "",
+      gender: "",
+      admissionForClass: "",
+      section: "",
+      fatherName: "",
+      fatherCellPhone: "",
+      motherName: "",
+      motherCellPhone: "",
+      dob: "",
+      religion: "",
+      admissionDate: "",
+      image: null,
+    });
     navigate("/login");
   };
 
