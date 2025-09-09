@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";   // 👈 navigate hook import
 import Logo from "../assets/images/logo.jpg"; // Ensure your image is here
 
 const Login = () => {
@@ -6,11 +7,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [academicYear, setAcademicYear] = useState("");
 
+  const navigate = useNavigate();  // 👈 initialize navigate
+
   const handleLogin = (e) => {
     e.preventDefault();
+
     console.log("Username:", username);
     console.log("Password:", password);
     console.log("Academic Year:", academicYear);
+
+    // 👇 After successful login navigate to dashboard
+    navigate("/dashboard");
   };
 
   return (
@@ -40,7 +47,7 @@ const Login = () => {
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#023561]"
               required
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select academic year
               </option>
               <option value="2025-26">2025-26</option>

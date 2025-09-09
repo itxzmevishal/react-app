@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Listbox } from "@headlessui/react";
+import { HiSelector } from "react-icons/hi";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -19,6 +21,18 @@ const Registration = () => {
     admissionDate: "",
     image: null,
   });
+
+  const religions = [
+    "Hindu",
+    "Muslim",
+    "Christian",
+    "Sikh",
+    "Buddhist",
+    "Other",
+  ];
+  const genders = ["Male", "Female"];
+  const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  const sections = ["A", "B", "C"];
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -51,13 +65,44 @@ const Registration = () => {
     navigate("/login");
   };
 
+  // Updated Listbox
+  const renderListbox = (label, value, options) => (
+    <div className="relative">
+      <label className="text-[#023561] mb-2 block">{label}</label>
+      <Listbox
+        value={formData[value]}
+        onChange={(val) => setFormData({ ...formData, [value]: val })}
+      >
+        <div className="relative">
+          <Listbox.Button className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all">
+            {formData[value] || `Select ${label}`}
+            <HiSelector className="w-5 h-5 text-gray-500" />
+          </Listbox.Button>
+
+          {/* Dropdown always opens downward, scrollable */}
+          <Listbox.Options className="absolute left-0 top-full mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-30 overflow-y-auto z-50">
+            {options.map((option, idx) => (
+              <Listbox.Option
+                key={idx}
+                value={option}
+                className={({ active, selected }) =>
+                  `cursor-pointer px-3 py-2 ${
+                    active ? "bg-[#023561]/20" : ""
+                  } ${selected ? "font-semibold" : ""}`
+                }
+              >
+                {option}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </div>
+      </Listbox>
+    </div>
+  );
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#023561]/20 via-[#023561]/10 to-[#023561]/5 p-4">
-      <div className="relative w-full max-w-7xl p-8 rounded-3xl backdrop-blur-xl bg-white/15 border border-[#023561]/30 shadow-2xl overflow-hidden">
-        {/* Background shapes */}
-        <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#023561]/30 rounded-full opacity-30 blur-3xl"></div>
-        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-[#023561]/20 rounded-full opacity-30 blur-3xl"></div>
-
+      <div className="relative w-full max-w-7xl p-8 rounded-3xl backdrop-blur-xl bg-white/15 border border-[#023561]/30 shadow-2xl overflow-visible">
         <h2 className="relative text-3xl font-extrabold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#023561] to-[#03508C]">
           Student Registration
         </h2>
@@ -76,7 +121,7 @@ const Registration = () => {
                 value={formData.admissionNo}
                 onChange={handleChange}
                 placeholder="Admission No"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div>
@@ -87,7 +132,7 @@ const Registration = () => {
                 value={formData.fatherName}
                 onChange={handleChange}
                 placeholder="Father Name"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div>
@@ -98,26 +143,10 @@ const Registration = () => {
                 value={formData.motherName}
                 onChange={handleChange}
                 placeholder="Mother Name"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
-            <div>
-              <label className="text-[#023561] mb-2 block">Religion</label>
-              <select
-                name="religion"
-                value={formData.religion}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
-              >
-                <option value="">Select Religion</option>
-                <option value="Hindu">Hindu</option>
-                <option value="Muslim">Muslim</option>
-                <option value="Christian">Christian</option>
-                <option value="Sikh">Sikh</option>
-                <option value="Buddhist">Buddhist</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+            {renderListbox("Religion", "religion", religions)}
           </div>
 
           {/* Column 2 */}
@@ -130,7 +159,7 @@ const Registration = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div>
@@ -143,7 +172,7 @@ const Registration = () => {
                 value={formData.fatherCellPhone}
                 onChange={handleChange}
                 placeholder="Father Phone"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div>
@@ -156,7 +185,7 @@ const Registration = () => {
                 value={formData.motherCellPhone}
                 onChange={handleChange}
                 placeholder="Mother Phone"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div>
@@ -168,7 +197,7 @@ const Registration = () => {
                 name="admissionDate"
                 value={formData.admissionDate}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
           </div>
@@ -183,63 +212,12 @@ const Registration = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
-
-            {/* Admission For Class Dropdown */}
-            <div>
-              <label className="text-[#023561] mb-2 block">
-                Admission For Class
-              </label>
-              <select
-                name="admissionForClass"
-                value={formData.admissionForClass}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
-              >
-                <option value="">Select Class</option>
-                <option value="I">I</option>
-                <option value="II">II</option>
-                <option value="III">III</option>
-                <option value="IV">IV</option>
-                <option value="V">V</option>
-                <option value="VI">VI</option>
-                <option value="VII">VII</option>
-                <option value="VIII">VIII</option>
-                <option value="IX">IX</option>
-                <option value="X">X</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="text-[#023561] mb-2 block">Section</label>
-              <select
-                name="section"
-                value={formData.section}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
-              >
-                <option value="">Select Section</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="text-[#023561] mb-2 block">Gender</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
+            {renderListbox("Admission For Class", "admissionForClass", classes)}
+            {renderListbox("Section", "section", sections)}
+            {renderListbox("Gender", "gender", genders)}
           </div>
 
           {/* Column 4 */}
@@ -252,7 +230,7 @@ const Registration = () => {
                 value={formData.dob}
                 onChange={handleChange}
                 max={new Date().toISOString().split("T")[0]}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div className="relative">
@@ -262,7 +240,7 @@ const Registration = () => {
                 name="image"
                 accept="image/*"
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
               {formData.image && (
                 <div className="mt-2 w-full h-42 relative">
