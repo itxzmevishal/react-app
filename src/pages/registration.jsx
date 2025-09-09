@@ -45,6 +45,7 @@ const Registration = () => {
         <h2 className="relative text-3xl font-extrabold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#023561] to-[#03508C]">
           Student Registration
         </h2>
+
         <form
           onSubmit={handleSubmit}
           className="relative grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 auto-rows-auto"
@@ -86,19 +87,25 @@ const Registration = () => {
             </div>
             <div>
               <label className="text-[#023561] mb-2 block">Religion</label>
-              <input
-                type="text"
+              <select
                 name="religion"
                 value={formData.religion}
                 onChange={handleChange}
-                placeholder="Religion"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
-              />
+              >
+                <option value="">Select Religion</option>
+                <option value="Hindu">Hindu</option>
+                <option value="Muslim">Muslim</option>
+                <option value="Christian">Christian</option>
+                <option value="Sikh">Sikh</option>
+                <option value="Buddhist">Buddhist</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
 
           {/* Column 2 */}
-          <div className="flex flex-col gap-4 col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+          <div className="flex flex-col gap-4 col-span-1">
             <div>
               <label className="text-[#023561] mb-2 block">First Name</label>
               <input
@@ -151,7 +158,7 @@ const Registration = () => {
           </div>
 
           {/* Column 3 */}
-          <div className="flex flex-col gap-4 col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1">
+          <div className="flex flex-col gap-4 col-span-1">
             <div>
               <label className="text-[#023561] mb-2 block">Last Name</label>
               <input
@@ -163,19 +170,32 @@ const Registration = () => {
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
               />
             </div>
+
+            {/* Admission For Class Dropdown */}
             <div>
               <label className="text-[#023561] mb-2 block">
                 Admission For Class
               </label>
-              <input
-                type="text"
+              <select
                 name="admissionForClass"
                 value={formData.admissionForClass}
                 onChange={handleChange}
-                placeholder="Class"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 backdrop-blur-sm transition-all"
-              />
+              >
+                <option value="">Select Class</option>
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="VI">VI</option>
+                <option value="VII">VII</option>
+                <option value="VIII">VIII</option>
+                <option value="IX">IX</option>
+                <option value="X">X</option>
+              </select>
             </div>
+
             <div>
               <label className="text-[#023561] mb-2 block">Section</label>
               <select
@@ -190,6 +210,7 @@ const Registration = () => {
                 <option value="C">C</option>
               </select>
             </div>
+
             <div>
               <label className="text-[#023561] mb-2 block">Gender</label>
               <select
