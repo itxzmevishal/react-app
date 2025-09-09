@@ -79,7 +79,6 @@ const Registration = () => {
             <HiSelector className="w-5 h-5 text-gray-500" />
           </Listbox.Button>
 
-          {/* Dropdown always opens downward, scrollable */}
           <Listbox.Options className="absolute left-0 top-full mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-30 overflow-y-auto z-50">
             {options.map((option, idx) => (
               <Listbox.Option
