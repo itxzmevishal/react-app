@@ -30,9 +30,9 @@ const Registration = () => {
     "Buddhist",
     "Other",
   ];
-  const genders = ["Male", "Female"];
+  const genders = ["Male", "Female", "Other"];
   const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-  const sections = ["A", "B", "C"];
+  const sections = ["A", "B", "C", "D"];
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -79,7 +79,7 @@ const Registration = () => {
             <HiSelector className="w-5 h-5 text-gray-500" />
           </Listbox.Button>
 
-          <Listbox.Options className="absolute left-0 top-full mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-30 overflow-y-auto z-50">
+          <Listbox.Options className="absolute left-0 top-full mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-25 overflow-y-auto z-50">
             {options.map((option, idx) => (
               <Listbox.Option
                 key={idx}
@@ -100,7 +100,7 @@ const Registration = () => {
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#023561]/20 via-[#023561]/10 to-[#023561]/5 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#023561]/20 via-[#023561]/10 to-[#023561]/5 p-8">
       <div className="relative w-full max-w-7xl p-8 rounded-3xl backdrop-blur-xl bg-white/15 border border-[#023561]/30 shadow-2xl overflow-visible">
         <h2 className="relative text-3xl font-extrabold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#023561] to-[#03508C]">
           Student Registration

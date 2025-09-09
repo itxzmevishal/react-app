@@ -19,45 +19,77 @@ const Dashboard = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const menuItems = [
-    { name: "Administration", icon: HiUserGroup, dropdown: [
+    {
+      name: "Administration",
+      icon: HiUserGroup,
+      dropdown: [
         { name: "Registration", path: "/dashboard/registration" },
         { name: "Users", path: "/dashboard/users" },
-        { name: "Roles", path: "/dashboard/roles" }
-      ]},
-    { name: "Accounts", icon: HiCurrencyDollar, dropdown: [
+        { name: "Roles", path: "/dashboard/roles" },
+      ],
+    },
+    {
+      name: "Accounts",
+      icon: HiCurrencyDollar,
+      dropdown: [
         { name: "Invoices", path: "/dashboard/invoices" },
         { name: "Payments", path: "/dashboard/payments" },
-        { name: "Reports", path: "/dashboard/account-reports" }
-      ]},
-    { name: "Academics", icon: HiAcademicCap, dropdown: [
+        { name: "Reports", path: "/dashboard/account-reports" },
+      ],
+    },
+    {
+      name: "Academics",
+      icon: HiAcademicCap,
+      dropdown: [
         { name: "Courses", path: "/dashboard/courses" },
         { name: "Students", path: "/dashboard/students" },
-        { name: "Exams", path: "/dashboard/exams" }
-      ]},
-    { name: "Reports", icon: HiChartBar, dropdown: [
+        { name: "Exams", path: "/dashboard/exams" },
+      ],
+    },
+    {
+      name: "Reports",
+      icon: HiChartBar,
+      dropdown: [
         { name: "Daily Report", path: "/dashboard/daily-report" },
         { name: "Monthly Report", path: "/dashboard/monthly-report" },
-        { name: "Annual Report", path: "/dashboard/annual-report" }
-      ]},
-    { name: "Mobile Apps", icon: HiDeviceMobile, dropdown: [
+        { name: "Annual Report", path: "/dashboard/annual-report" },
+      ],
+    },
+    {
+      name: "Mobile Apps",
+      icon: HiDeviceMobile,
+      dropdown: [
         { name: "iOS App", path: "/dashboard/ios" },
-        { name: "Android App", path: "/dashboard/android" }
-      ]},
-    { name: "Communicate", icon: HiChat, dropdown: [
+        { name: "Android App", path: "/dashboard/android" },
+      ],
+    },
+    {
+      name: "Communicate",
+      icon: HiChat,
+      dropdown: [
         { name: "Email", path: "/dashboard/email" },
         { name: "SMS", path: "/dashboard/sms" },
-        { name: "Chat", path: "/dashboard/chat" }
-      ]},
-    { name: "Help", icon: HiQuestionMarkCircle, dropdown: [
+        { name: "Chat", path: "/dashboard/chat" },
+      ],
+    },
+    {
+      name: "Help",
+      icon: HiQuestionMarkCircle,
+      dropdown: [
         { name: "FAQ", path: "/dashboard/faq" },
         { name: "Support", path: "/dashboard/support" },
-        { name: "Contact Us", path: "/dashboard/contact" }
-      ]},
-    { name: "Profile", icon: HiUserCircle, dropdown: [
+        { name: "Contact Us", path: "/dashboard/contact" },
+      ],
+    },
+    {
+      name: "Profile",
+      icon: HiUserCircle,
+      dropdown: [
         { name: "My Account", path: "/dashboard/account" },
         { name: "Settings", path: "/dashboard/settings" },
-        { name: "Logout", path: "/dashboard/logout" }
-      ]}
+        { name: "Logout", path: "/dashboard/logout" },
+      ],
+    },
   ];
 
   const toggleDropdown = (index) => {
@@ -65,9 +97,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 overflow-x-hidden">
-      {/* Navbar */}
-      <nav className="flex flex-wrap items-center justify-between px-4 sm:px-6 md:px-6 py-3 bg-[#023561] shadow-md relative">
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      {/* Navbar Fixed */}
+      <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 sm:px-6 md:px-6 py-3 bg-[#023561] shadow-md">
         {/* Logo */}
         <div className="flex items-center flex-shrink-0 mr-4">
           <img src={Logo} alt="Logo" className="h-10 w-10 rounded-full mr-2" />
@@ -83,11 +115,8 @@ const Dashboard = () => {
                 key={idx}
                 className="relative group flex flex-col items-center justify-end cursor-pointer"
               >
-                {/* Icon above name */}
                 <Icon className="text-2xl mb-1" />
                 <span className="text-sm">{menu.name}</span>
-
-                {/* Dropdown */}
                 <ul
                   className={`absolute left-0 top-full bg-white text-gray-800 shadow-lg rounded-md min-w-[160px] max-h-60 overflow-y-auto z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ${
                     menu.name === "Profile" ? "right-0 left-auto" : ""
@@ -123,7 +152,6 @@ const Dashboard = () => {
             menuOpen ? "translate-x-0" : "translate-x-full"
           } transition-transform duration-300 ease-in-out z-50 p-6 lg:hidden`}
         >
-          {/* Close Icon on top-right */}
           <div className="flex justify-end mb-6">
             <HiX
               className="text-3xl cursor-pointer"
@@ -168,8 +196,8 @@ const Dashboard = () => {
         </div>
       </nav>
 
-      {/* Nested Page Content */}
-      <div className="flex-1 overflow-x-hidden">
+      {/* Content Scrollable */}
+      <div className="flex-1 mt-15 overflow-y-auto">
         <Outlet />
       </div>
     </div>
