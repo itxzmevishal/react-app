@@ -66,7 +66,13 @@ const Dashboard = () => {
       name: "Academics",
       icon: HiAcademicCap,
       dropdown: [
-        { name: "Courses", path: "/dashboard/courses/add" },
+        {
+          name: "Courses",
+          submenu: [
+            { name: "AI", path: "/dashboard/invoices/create" },
+            { name: "ML", path: "/dashboard/invoices/view" },
+          ],
+        },
         { name: "Students", path: "/dashboard/students/add" },
       ],
     },
@@ -94,12 +100,18 @@ const Dashboard = () => {
     {
       name: "Help",
       icon: HiQuestionMarkCircle,
-      path: "/dashboard/help",
+      dropdown: [
+        { name: "Documentation", path: "/dashboard/help/docs" },
+        { name: "Support", path: "/dashboard/help/support" },
+      ],
     },
     {
       name: "Profile",
       icon: HiUserCircle,
-      path: "/dashboard/profile",
+      dropdown: [
+        { name: "View Profile", path: "/dashboard/profile/view" },
+        { name: "Settings", path: "/dashboard/profile/settings" },
+      ],
     },
   ];
 
@@ -134,6 +146,7 @@ const Dashboard = () => {
         <ul className="hidden lg:flex gap-6 text-white font-medium">
           {menuItems.map((menu, idx) => {
             const Icon = menu.icon;
+            const isRightAligned = menu.name === "Help" || menu.name === "Profile"; // ye left ki taraf khulega
             return (
               <li
                 key={idx}
@@ -144,7 +157,11 @@ const Dashboard = () => {
 
                 {/* Dropdown */}
                 {menu.dropdown && (
-                  <ul className="absolute left-0 top-[118%] mt-2 bg-white text-gray-800 shadow-lg rounded-md min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <ul
+                    className={`absolute ${
+                      isRightAligned ? "right-0" : "left-0"
+                    } top-[118%] mt-2 bg-white text-gray-800 shadow-lg rounded-md min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200`}
+                  >
                     {menu.dropdown.map((item, i) => (
                       <li key={i} className="relative group/sub">
                         <Link
@@ -157,7 +174,11 @@ const Dashboard = () => {
                         </Link>
 
                         {item.submenu && (
-                          <ul className="absolute top-0 left-full ml-1 bg-white shadow-lg rounded-md min-w-[160px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                          <ul
+                            className={`absolute top-0 ${
+                              isRightAligned ? "right-full mr-1" : "left-full ml-1"
+                            } bg-white shadow-lg rounded-md min-w-[160px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200`}
+                          >
                             {item.submenu.map((sub, si) => (
                               <li key={si}>
                                 <Link
