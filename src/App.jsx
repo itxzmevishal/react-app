@@ -1,8 +1,12 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from './pages/login';
-import Registration from './pages/registration';
 import Dashboard from './pages/dashboard';
+
+// Pages
+import Registration from './pages/registration';
+import Addmission from './pages/addmission';
+// Future pages: import them yahan kar sakte ho
 
 function App() {
   return (
@@ -16,12 +20,39 @@ function App() {
 
         {/* Dashboard Layout with Nested Routes */}
         <Route path="/dashboard" element={<Dashboard />}>
-          {/* Registration inside Dashboard */}
-          <Route path="registration" element={<Registration />} />
+          
+          {/* 🔹 Registration */}
+          <Route path="registration">
+            <Route path="add" element={<Registration />} />
+            {/* <Route path="view" element={<ViewRegistration />} /> */}
+          </Route>
+          {/* 🔹 Registration */}
+          <Route path="addmission">
+            <Route path="add" element={<Addmission />} />
+            {/* <Route path="view" element={<ViewRegistration />} /> */}
+          </Route>
 
-          {/* future pages bhi yahi add kar sakte ho */}
-          {/* <Route path="users" element={<Users />} /> */}
-          {/* <Route path="reports" element={<Reports />} /> */}
+          {/* 🔹 Users */}
+          <Route path="users">
+            {/* <Route path="add" element={<Users />} /> */}
+            {/* <Route path="view" element={<ViewUsers />} /> */}
+          </Route>
+
+          {/* 🔹 Reports */}
+          <Route path="reports">
+            {/* <Route path="daily" element={<DailyReports />} /> */}
+            {/* <Route path="monthly" element={<MonthlyReports />} /> */}
+          </Route>
+
+          {/* 🔹 Communicate */}
+          <Route path="communicate">
+            {/* <Route path="email" element={<Email />} /> */}
+            {/* <Route path="chat" element={<Chat />} /> */}
+          </Route>
+
+          {/* Help & Profile directly (no submenu) */}
+          {/* <Route path="help" element={<Help />} /> */}
+          {/* <Route path="profile" element={<Profile />} /> */}
         </Route>
       </Routes>
     </Router>

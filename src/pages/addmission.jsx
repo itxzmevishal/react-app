@@ -2,67 +2,72 @@ import React, { useState } from "react";
 import { Listbox } from "@headlessui/react";
 import { HiSelector } from "react-icons/hi";
 
-const Registration = () => {
+const Addmission = () => {
   const [formData, setFormData] = useState({
-    admissionNo: "",
-    firstName: "",
-    lastName: "",
+    name: "",
     gender: "",
-    admissionForClass: "",
-    section: "",
-    fatherName: "",
-    fatherCellPhone: "",
-    motherName: "",
-    motherCellPhone: "",
-    dob: "",
-    religion: "",
-    admissionDate: "",
-    image: null,
+    employeeCode: "",
+    fatherOrHusbandName: "",
+    department: "",
+    dateOfJoining: "",
+    biometricId: "",
+    designation: "",
+    classTeacherFor: "",
+    qualification: "",
+    contactNumber: "",
+    address: "",
+    institution: "",
+    yearOfPassing: "",
+    gradeOrPercentage: "",
   });
 
-  const religions = [
-    "Hindu",
-    "Muslim",
-    "Christian",
-    "Sikh",
-    "Buddhist",
+  const genders = ["Male", "Female", "Other"];
+  const departments = [
+    "Administration",
+    "Accounts",
+    "Academics",
+    "Library",
+    "Sports",
+    "Transport",
     "Other",
   ];
-  const genders = ["Male", "Female", "Other"];
-  const classes = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-  const sections = ["A", "B", "C", "D"];
+  const qualifications = [
+    "High School",
+    "Bachelor's",
+    "Master's",
+    "PhD",
+    "Other",
+  ];
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (files) {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    alert("Employee Admission Submitted!");
     setFormData({
-      admissionNo: "",
-      firstName: "",
-      lastName: "",
+      name: "",
       gender: "",
-      admissionForClass: "",
-      section: "",
-      fatherName: "",
-      fatherCellPhone: "",
-      motherName: "",
-      motherCellPhone: "",
-      dob: "",
-      religion: "",
-      admissionDate: "",
-      image: null,
+      employeeCode: "",
+      fatherOrHusbandName: "",
+      department: "",
+      dateOfJoining: "",
+      biometricId: "",
+      designation: "",
+      classTeacherFor: "",
+      qualification: "",
+      contactNumber: "",
+      address: "",
+      institution: "",
+      yearOfPassing: "",
+      gradeOrPercentage: "",
     });
   };
 
-  // Updated Listbox
+  // Custom Listbox Renderer
   const renderListbox = (label, value, options) => (
     <div className="relative">
       <label className="text-[#023561] mb-2 block">{label}</label>
@@ -76,7 +81,7 @@ const Registration = () => {
             <HiSelector className="w-5 h-5 text-gray-500" />
           </Listbox.Button>
 
-          <Listbox.Options className="absolute left-0 top-full mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-25 overflow-y-auto z-50">
+          <Listbox.Options className="absolute left-0 top-full mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-40 overflow-y-auto z-50">
             {options.map((option, idx) => (
               <Listbox.Option
                 key={idx}
@@ -100,7 +105,7 @@ const Registration = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#023561]/20 via-[#023561]/10 to-[#023561]/5 p-8">
       <div className="relative w-full max-w-7xl p-8 rounded-3xl backdrop-blur-xl bg-white/15 border border-[#023561]/30 shadow-2xl overflow-visible">
         <h2 className="relative text-3xl font-extrabold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#023561] to-[#03508C]">
-          Student Registration
+          Employee Admission Form
         </h2>
 
         <form
@@ -110,89 +115,75 @@ const Registration = () => {
           {/* Column 1 */}
           <div className="flex flex-col gap-4 col-span-1">
             <div>
-              <label className="text-[#023561] mb-2 block">Admission No</label>
+              <label className="text-[#023561] mb-2 block">Employee Name</label>
               <input
                 type="text"
-                name="admissionNo"
-                value={formData.admissionNo}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                placeholder="Admission No"
+                placeholder="Employee Name"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+              />
+            </div>
+            {renderListbox("Gender", "gender", genders)}
+            <div>
+              <label className="text-[#023561] mb-2 block">Employee Code</label>
+              <input
+                type="text"
+                name="employeeCode"
+                value={formData.employeeCode}
+                onChange={handleChange}
+                placeholder="Employee Code"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
             <div>
-              <label className="text-[#023561] mb-2 block">Father Name</label>
+              <label className="text-[#023561] mb-2 block">
+                Father / Husband Name
+              </label>
               <input
                 type="text"
-                name="fatherName"
-                value={formData.fatherName}
+                name="fatherOrHusbandName"
+                value={formData.fatherOrHusbandName}
                 onChange={handleChange}
-                placeholder="Father Name"
+                placeholder="Father or Husband Name"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
-            <div>
-              <label className="text-[#023561] mb-2 block">Mother Name</label>
-              <input
-                type="text"
-                name="motherName"
-                value={formData.motherName}
-                onChange={handleChange}
-                placeholder="Mother Name"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
-              />
-            </div>
-            {renderListbox("Religion", "religion", religions)}
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col gap-4 col-span-1">
+            {renderListbox("Department", "department", departments)}
             <div>
-              <label className="text-[#023561] mb-2 block">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                placeholder="First Name"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
-              />
-            </div>
-            <div>
-              <label className="text-[#023561] mb-2 block">
-                Father Cell Phone
-              </label>
-              <input
-                type="text"
-                name="fatherCellPhone"
-                value={formData.fatherCellPhone}
-                onChange={handleChange}
-                placeholder="Father Phone"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
-              />
-            </div>
-            <div>
-              <label className="text-[#023561] mb-2 block">
-                Mother Cell Phone
-              </label>
-              <input
-                type="text"
-                name="motherCellPhone"
-                value={formData.motherCellPhone}
-                onChange={handleChange}
-                placeholder="Mother Phone"
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
-              />
-            </div>
-            <div>
-              <label className="text-[#023561] mb-2 block">
-                Admission Date
-              </label>
+              <label className="text-[#023561] mb-2 block">Date of Joining</label>
               <input
                 type="date"
-                name="admissionDate"
-                value={formData.admissionDate}
+                name="dateOfJoining"
+                value={formData.dateOfJoining}
                 onChange={handleChange}
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-[#023561] mb-2 block">Biometric ID</label>
+              <input
+                type="text"
+                name="biometricId"
+                value={formData.biometricId}
+                onChange={handleChange}
+                placeholder="Biometric ID"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-[#023561] mb-2 block">Designation</label>
+              <input
+                type="text"
+                name="designation"
+                value={formData.designation}
+                onChange={handleChange}
+                placeholder="Designation"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
@@ -201,56 +192,84 @@ const Registration = () => {
           {/* Column 3 */}
           <div className="flex flex-col gap-4 col-span-1">
             <div>
-              <label className="text-[#023561] mb-2 block">Last Name</label>
+              <label className="text-[#023561] mb-2 block">
+                Class Teacher For
+              </label>
               <input
                 type="text"
-                name="lastName"
-                value={formData.lastName}
+                name="classTeacherFor"
+                value={formData.classTeacherFor}
                 onChange={handleChange}
-                placeholder="Last Name"
+                placeholder="Class Teacher For"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
-            {renderListbox("Admission For Class", "admissionForClass", classes)}
-            {renderListbox("Section", "section", sections)}
-            {renderListbox("Gender", "gender", genders)}
-          </div>
-
-          {/* Column 4 */}
-          <div className="flex flex-col gap-4 col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-1">
+            {renderListbox("Qualification", "qualification", qualifications)}
             <div>
-              <label className="text-[#023561] mb-2 block">DOB</label>
+              <label className="text-[#023561] mb-2 block">Contact Number</label>
               <input
-                type="date"
-                name="dob"
-                value={formData.dob}
+                type="text"
+                name="contactNumber"
+                value={formData.contactNumber}
                 onChange={handleChange}
-                max={new Date().toISOString().split("T")[0]}
+                placeholder="Contact Number"
                 className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
             </div>
-            <div className="relative">
-              <label className="text-[#023561] mb-2 block">Upload Image</label>
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
+            <div >
+              <label className="text-[#023561] mb-2 block">Address</label>
+              <textarea
+                name="address"
+                value={formData.address}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+                placeholder="Full Address"
+                rows="1"
+                className=" w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner resize-none focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
               />
-              {formData.image && (
-                <div className="mt-2 w-full h-42 relative">
-                  <img
-                    src={URL.createObjectURL(formData.image)}
-                    alt="Preview"
-                    className="absolute top-0 left-0 w-full h-full object-cover rounded-xl border border-[#023561]/40 shadow-md"
-                  />
-                </div>
-              )}
             </div>
           </div>
 
-          {/* Submit Button */}
+          {/* Column 4 (Education Details) */}
+          <div className="flex flex-col gap-4 col-span-1">
+            <div>
+              <label className="text-[#023561] mb-2 block">Institution</label>
+              <input
+              required
+                type="text"
+                name="institution"
+                value={formData.institution}
+                onChange={handleChange}
+                placeholder="Institution Name"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-[#023561] mb-2 block">Year of Passing</label>
+              <input
+                type="text"
+                name="yearOfPassing"
+                value={formData.yearOfPassing}
+                onChange={handleChange}
+                placeholder="Year of Passing"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-[#023561] mb-2 block">
+                Grade / Percentage
+              </label>
+              <input
+                type="text"
+                name="gradeOrPercentage"
+                value={formData.gradeOrPercentage}
+                onChange={handleChange}
+                placeholder="Grade / Percentage"
+                className="w-full px-3 py-2 rounded-xl border border-[#023561]/40 bg-white/20 text-[#023561] shadow-inner focus:outline-none focus:ring-2 focus:ring-[#023561]/70 transition-all"
+              />
+            </div>
+          </div>
+
+          {/* Submit */}
           <div className="md:col-span-2 lg:col-span-4 mt-8 flex justify-center">
             <button
               type="submit"
@@ -265,4 +284,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Addmission;
